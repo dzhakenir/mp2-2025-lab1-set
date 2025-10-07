@@ -123,17 +123,24 @@ TBitField TBitField::operator~(void) // отрицание
 
 // ввод/вывод
 
-istream &operator>>(istream &istr, TBitField &bf) // ввод
+istream& operator>>(istream& istr, TBitField& bf) // ввод
 {
-	int a;
-	while (istr >> a)bf.SetBit(a);
+	int n,t;
+	istr >> n;
+	bf = TBitField(n);
+	for (int i = 0; i < bf.BitLen; i++) {
+		istr >> t;
+		if(t)bf.SetBit(i);
+	}
 	return istr;
 }
 
-ostream &operator<<(ostream &ostr, const TBitField &bf) // вывод
+ostream& operator<<(ostream& ostr, const TBitField& bf) // вывод
 {
-	for (int i = 0; i < bf.GetLength(); i++) {
-		if (bf.GetBit(i))ostr << i<<" ";
+	ostr << bf.BitLen << ":";
+	for (int i = 0; i < bf.BitLen; i++) {
+		ostr << bf.GetBit(i) << " ";
 	}
+	ostr << endl;
 	return ostr;
 }
