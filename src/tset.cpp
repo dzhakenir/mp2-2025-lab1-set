@@ -108,17 +108,15 @@ TSet TSet::operator~(void) // дополнение
 
 // перегрузка ввода/вывода
 
-istream &operator>>(istream &istr, TSet &s) // ввод
+istream& operator>>(istream& istr, TSet& s) // ввод
 {
-    int a;
-    while (istr >> a)s.InsElem(a);
-    return istr;
+	istr >> s.BitField;
+	return istr;
 }
 
-ostream& operator<<(ostream &ostr, const TSet &s) // вывод
+ostream& operator<<(ostream& ostr, const TSet& s) // вывод
 {
-    for (int i = 0; i < s.GetMaxPower(); i++) {
-        if (s.IsMember(i))ostr << i;
-    }
-    return ostr;
+	ostr << s.MaxPower;
+	ostr << s.BitField;
+	return ostr;
 }
