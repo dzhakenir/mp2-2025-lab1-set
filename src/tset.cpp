@@ -7,21 +7,21 @@
 
 #include "tset.h"
 
-TSet::TSet(int mp) : BitField(-1)
+TSet::TSet(int mp) : BitField(0)
 {
     MaxPower = mp;
     BitField = TBitField(mp);
 }
 
 // конструктор копирования
-TSet::TSet(const TSet &s) : BitField(-1)
+TSet::TSet(const TSet &s) : BitField(0)
 {
     MaxPower = s.MaxPower;
     BitField = s.BitField;
 }
 
 // конструктор преобразования типа
-TSet::TSet(const TBitField &bf) : BitField(-1)
+TSet::TSet(const TBitField &bf) : BitField(0)
 {
     MaxPower = bf.GetLength();
     BitField = bf;
@@ -69,13 +69,12 @@ int TSet::operator==(const TSet &s) const // сравнение
 
 int TSet::operator!=(const TSet &s) const // сравнение
 {
-    return BitField != BitField;
+    return BitField != s.BitField;
 }
 
 TSet TSet::operator+(const TSet &s) // объединение
 {
-    TSet t(*this);
-    t.BitField = BitField | s.BitField;
+    TSet t(BitField | s.BitField);
     return t;
 }
 
