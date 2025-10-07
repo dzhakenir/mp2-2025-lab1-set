@@ -126,6 +126,7 @@ istream &operator>>(istream &istr, TBitField &bf) // ввод
 {
 	int a;
 	while (istr >> a)bf.SetBit(a);
+	return istr;
 }
 
 ostream &operator<<(ostream &ostr, const TBitField &bf) // вывод
