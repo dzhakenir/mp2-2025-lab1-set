@@ -113,6 +113,7 @@ istream &operator>>(istream &istr, TSet &s) // ввод
 {
     int a;
     while (istr >> a)s.InsElem(a);
+    return istr;
 }
 
 ostream& operator<<(ostream &ostr, const TSet &s) // вывод
