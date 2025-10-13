@@ -80,8 +80,15 @@ TSet TSet::operator+(const TSet &s) // объединение
 
 TSet TSet::operator+(const int Elem) // объединение с элементом
 {
-    TSet t(*this);
-    t.InsElem(Elem);
+    TSet t(Elem);
+    if (Elem < MaxPower) {
+        t=*this;
+        t.InsElem(Elem);
+    }
+    else {
+        t.InsElem(Elem);
+        t = t + (*this);
+    }
     return t;
 }
 
@@ -108,15 +115,17 @@ TSet TSet::operator~(void) // дополнение
 
 // перегрузка ввода/вывода
 
-istream& operator>>(istream& istr, TSet& s) // ввод
+istream &operator>>(istream &istr, TSet &s) // ввод
 {
-	istr >> s.BitField;
-	return istr;
+    int a;
+    while (istr >> a)s.InsElem(a);
+    return istr;
 }
 
-ostream& operator<<(ostream& ostr, const TSet& s) // вывод
+ostream& operator<<(ostream &ostr, const TSet &s) // вывод
 {
-	ostr << s.MaxPower;
-	ostr << s.BitField;
-	return ostr;
+    for (int i = 0; i < s.GetMaxPower(); i++) {
+        if (s.IsMember(i))ostr << i;
+    }
+    return ostr;
 }
